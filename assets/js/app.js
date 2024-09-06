@@ -1,20 +1,33 @@
 let number = Math.random();
 number = number * 100;
-
 let fixedNumber = Math.trunc(number);
 console.log(fixedNumber);
 
-function guessing() {   
-    if (fixedNumber > numberGuess) {
-        answer.innerHTML = `My number is bigger than ${numberGuess}`;
-    } else if (fixedNumber < numberGuess) {
-        answer.innerHTML = `My number is lower than ${numberGuess}`;
-    } else {
-        answer.innerHTML = `You're win!`;
-    }
+let tries = 10;
 
-    if (i === tries) {
-        answer.innerHTML = `Sorry, you've used all your tries. The correct number was ${fixedNumber}.`;
+function guessing(){   
+    
+    let numberGuess = answer.value;
+    
+    if(isNaN(numberGuess)){
+        variant.innerHTML = `Enter a valid number`;
+        return;
+    }
+    
+    tries--;
+    triesLeft.innerHTML = `Tries Left:${tries}`;
+    if (fixedNumber > numberGuess) {
+        variant.innerHTML = `My number is bigger than ${numberGuess}`;
+    } else if (fixedNumber < numberGuess) {
+        variant.innerHTML = `My number is lower than ${numberGuess}`;
+    } else {
+        variant.innerHTML = `You're win!`;
+    }
+    
+    if (0 === tries) {
+        variant.innerHTML = `Sorry, you've used all your tries. The correct number was ${fixedNumber}.`;
+        guessButton.disabled = true;
     }
 
 }
+
